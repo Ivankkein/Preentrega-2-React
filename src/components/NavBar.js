@@ -1,11 +1,31 @@
 import { Link } from 'react-router-dom';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CartWidget from './CartWidget';
 
 
 
   const NavBar = () => {
+
+    const [categories, setCategories] = useState([]);
+
+
+    useEffect(() => {
+      const fetchCategories = () => {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve([
+              { id: 'ps5', name: 'Juegos PS5' },
+              { id: 'switch', name: 'Juegos de Nintendo Switch' }
+            ]);
+          }, 1000);
+        });
+      };
+  
+      fetchCategories().then(data => setCategories(data));
+    }, []);
+
+
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
